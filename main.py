@@ -12,15 +12,11 @@ states = data.state.to_list()
 
 guessed_states = []
 while len(guessed_states) < 50:
-    text_input = screen.textinput(f'{len(guessed_states)}/50', 'Enter state name').title()
+    text_input = screen.textinput(f'{len(guessed_states)}/50 States Guessed', 'Enter state name').title()
     if text_input == 'Exit':
-        missing_states = []
-        for state in states:
-            if state not in guessed_states:
-                missing_states.append(state)
+        missing_states = [state for state in states if state not in guessed_states]
         df = pd.DataFrame(missing_states)
-        df.to_csv('missing_states.csv')
-        print(missing_states)
+        df.to_csv('states_to_learn.csv')
         break
     elif text_input in states and text_input not in guessed_states:
         t = Turtle()
